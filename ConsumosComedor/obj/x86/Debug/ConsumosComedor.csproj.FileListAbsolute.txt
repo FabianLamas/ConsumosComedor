@@ -29,3 +29,21 @@ C:\Users\iclavero\Source\Workspaces\Área de trabajo\ConsumosComedor\ConsumosCom
 C:\Users\iclavero\Source\Workspaces\Área de trabajo\ConsumosComedor\ConsumosComedor\bin\Debug\ConsumosComedor.application
 C:\Users\iclavero\Source\Workspaces\Área de trabajo\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.exe.manifest
 C:\Users\iclavero\Source\Workspaces\Área de trabajo\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.application
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\bin\Debug\BD.sdf
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\bin\Debug\ConsumosComedor.exe.config
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\bin\Debug\ConsumosComedor.exe.manifest
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\bin\Debug\ConsumosComedor.application
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\bin\Debug\ConsumosComedor.exe
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\bin\Debug\ConsumosComedor.pdb
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.csprojAssemblyReference.cache
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.frmConfig.resources
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.frmConsumos.resources
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.frmManual.resources
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.Properties.Resources.resources
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.csproj.GenerateResource.cache
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.csproj.CoreCompileInputs.cache
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.exe.manifest
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.application
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.csproj.CopyComplete
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.exe
+C:\Users\flamas\Desktop\nuevos aplicativos\ConsumosComedor\ConsumosComedor\obj\x86\Debug\ConsumosComedor.pdb

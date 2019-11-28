@@ -39,12 +39,12 @@ namespace ConsumosComedor
 
         private void frmConsumos_Load(object sender, EventArgs e)
         {
-            //DataTable dt = objDAO.SqlCallLocal("SELECT Automatico FROM Consumos");
+             // DataTable dt = objDAO.SqlCallLocal("SELECT Automatico FROM Consumos");
             DataTable dt = objDAO.SqlCall("SELECT Automatico FROM Consumos");
             if (dt == null)
-                //objDAO.SqlExecLocal("ALTER TABLE Consumos ADD COLUMN Automatico BIT NULL");
-
-                objDAO.SqlExecLocal("ALTER TABLE Consumos ADD Automatico BIT NULL");
+                
+                // objDAO.SqlExecLocal("ALTER TABLE Consumos ADD COLUMN Automatico BIT NULL");
+                // objDAO.SqlExecLocal("ALTER TABLE Consumos ADD Automatico BIT NULL");
 
             blnConStatus = objDAO.TestConnection();
             VerificarTurno();
@@ -94,10 +94,19 @@ namespace ConsumosComedor
 
         private void VerificarTurno()
         {
+
+            System.Diagnostics.Debug.WriteLine(" VERIFICAR TURNO 1 ");
+
             try
             {
-                //DataTable dt = objDAOTurnos.SqlCallLocal("SELECT Numero_turno, Nombre_turno, DASSCO FROM Turnos WHERE Uo = '" + ConsumosComedor.Properties.Settings.Default.Uo + "' AND CONVERT(nvarchar(5),getdate(),108) BETWEEN Hora_inicio AND Hora_final");
+                System.Diagnostics.Debug.WriteLine(" VERIFICAR TURNO 2 ");
+
+                string CONSUM = "COUY";
+                //  DataTable dt = objDAOTurnos.SqlCallLocal("SELECT Numero_turno, Nombre_turno, DASSCO FROM Turnos WHERE Uo = '" + ConsumosComedor.Properties.Settings.Default.Uo + "' AND CONVERT(nvarchar(5),getdate(),108) BETWEEN Hora_inicio AND Hora_final");
                 DataTable dt = objDAOTurnos.SqlCall("SELECT Numero_turno, Nombre_turno, DASSCO FROM Turnos WHERE Uo = '" + ConsumosComedor.Properties.Settings.Default.Uo + "' AND CONVERT(nvarchar(5),getdate(),108) BETWEEN Hora_inicio AND Hora_final");
+                
+                System.Diagnostics.Debug.WriteLine(dt);
+                System.Diagnostics.Debug.WriteLine(" EL DT FUE ");
 
                 if (!NumeroTurno.Equals(dt.Rows[0][0].ToString()))
                 {
@@ -166,13 +175,35 @@ namespace ConsumosComedor
                 //if (objDAO.SqlCallLocal("SELECT Legajo FROM Consumos WHERE Turno = " + NumeroTurno + " AND Fecha = CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)) AND CONVERT(INT,Legajo) = CONVERT(INT," + dt.Rows[0][3].ToString() + ")").Rows.Count < 1)
                 if (objDAO.SqlCall("SELECT Numero_tarjeta FROM Consumos WHERE Numero_turno = " + NumeroTurno + " AND Fecha_consumo = CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)) AND CONVERT(INT,Numero_tarjeta) = CONVERT(INT," + dt.Rows[0][3].ToString() + ")").Rows.Count < 1)
                 {
+                    DateTime _FechaConsumo = DateTime.Now.Date;
+                    int _NumeroTurno = Convert.ToInt32(NumeroTurno);
+                    //objDAO.SqlExecLocal("INSERT INTO Consumos (Fecha,Hora,Tarjeta,Legajo,Nombre,CeCo,EsVisita,Turno,Local,Automatico) VALUES (CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)),CONVERT(NVARCHAR(5),GETDATE(),108),'" + dt.Rows[0][0].ToString() + "','" + dt.Rows[0][3].ToString() + "','" + dt.Rows[0][4].ToString() + "','CentroCosto'," + EsVisita + "," + NumeroTurno + ",'" + ConsumosComedor.Properties.Settings.Default.Uo + "',1)");
+                    int _NumeroTarjeta = (int)dt.Rows[0][0];
+                    int _NumeroComida = 1;
+                    string _Dassco = "Z004";
+                    int _Numero_Pago = 0;
+                    string _Hora = DateTime.Now.ToString("HH:mm");
+                    string _Departamento = ConsumosComedor.Properties.Settings.Default.Uo;
+                    int _Automatico = 1;
+                    int _NumeroLote = 0;
+                    int _Transferida = 1;
+
+
                     string EsVisita = (dt.Rows[0][2].ToString().Equals("08") ? "1" : "0");
                     //objDAO.SqlExecLocal("INSERT INTO Consumos (Fecha,Hora,Tarjeta,Legajo,Nombre,CeCo,EsVisita,Turno,Local,Automatico) VALUES (CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)),CONVERT(NVARCHAR(5),GETDATE(),108),'" + dt.Rows[0][0].ToString() + "','" + dt.Rows[0][3].ToString() + "','" + dt.Rows[0][4].ToString() + "','CentroCosto'," + EsVisita + "," + NumeroTurno + ",'" + ConsumosComedor.Properties.Settings.Default.Uo + "',1)");
                     // borrar objDAO.SqlExecLocal("INSERT INTO Consumos (Fecha_consumo, Numero_turno, Numero_tarjeta, Numero_comida, DASSCO, Numero_pago, Hora, Departamento, Automatico, Numero_lote, Transferida) VALUES (CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)),CONVERT(NVARCHAR(5),GETDATE(),108),'" + dt.Rows[0][0].ToString() + "','" + dt.Rows[0][3].ToString() + "','" + dt.Rows[0][4].ToString() + "','CentroCosto'," + EsVisita + "," + NumeroTurno + ",'" + ConsumosComedor.Properties.Settings.Default.Uo + "',1)");
 
                     //arreglar objDAO.SqlExec("INSERT INTO Consumos(Fecha_consumo, Numero_turno, Numero_tarjeta, Numero_comida, DASSCO, Numero_pago, Hora, Departamento, Automatico, Numero_Lote, Transferida) VALUES(CONVERT(INT, CONVERT(NVARCHAR(8), GETDATE(), 112), '" + NumeroTurno + "', '" + dt.Rows[0][0].ToString() + "', 1 , 'Z003', " + 0 + ", CONVERT(NVARCHAR(5), GETDATE(), 108), '" + ConsumosComedor.Properties.Settings.Default.Uo + "', 1, NULL, 3)"); 
 
-                    objDAO.SqlExec("INSERT INTO dbo.Consumos(Fecha_consumo,Numero_turno,Numero_tarjeta,Numero_comida,DASSCO,Numero_pago,Hora,Departamento,Automatico,Numero_Lote,Transferida) VALUES ('20191127', 3, 747218, 1, 'Z004', 0, '01:08', 'COUY', 1, NULL, 3)");
+                    // objDAO.SqlExec("INSERT INTO dbo.Consumos(Fecha_consumo,Numero_turno,Numero_tarjeta,Numero_comida,DASSCO,Numero_pago,Hora,Departamento,Automatico,Numero_Lote,Transferida) VALUES ('20191127', 3, 747218, 1, 'Z004', 0, '01:08', 'COUY', 1, NULL, 3)");
+
+                    string _Query = "INSERT INTO dbo.Consumos(Fecha_consumo,Numero_turno,Numero_tarjeta,Numero_comida," +
+                        "DASSCO,Numero_pago,Hora,Departamento,Automatico,Numero_Lote,Transferida) VALUES ('" + _FechaConsumo + "',"
+                        + _NumeroTurno + ",'" + _NumeroTarjeta + "'," + _NumeroComida + ",'" + _Dassco + "'," + _Numero_Pago + ",'" + _Hora + "','"
+                        + _Departamento + "'," + _Automatico + ",'" + _NumeroLote + "'," + _Transferida + ")";
+
+                    objDAO.SqlExec(_Query);
+
 
                     CargarConsumos();
                 }
@@ -189,13 +220,40 @@ namespace ConsumosComedor
 
         public void GrabarConsumoManual(string _Legajo)
         {
-            DataTable dt = objDAO.SqlCallLocal("SELECT * FROM HistPerso1 WHERE CONVERT(int,PERNR) = CONVERT(int," + _Legajo + ")");
+            // DataTable dt = objDAO.SqlCallLocal("SELECT * FROM HistPerso1 WHERE CONVERT(int,PERNR) = CONVERT(int," + _Legajo + ")");
+            DataTable dt = objDAO.SqlCall("SELECT * FROM HistPerso1 WHERE PERNR = '" + _Legajo +"'");
+
             if (dt.Rows.Count > 0)
             {
-                if (objDAO.SqlCallLocal("SELECT Legajo FROM Consumos WHERE Turno = " + NumeroTurno + " AND Fecha = CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)) AND CONVERT(INT,Legajo) = CONVERT(INT," + dt.Rows[0][3].ToString() + ")").Rows.Count < 1)
+                int _NumeroTurno = Convert.ToInt32(NumeroTurno);
+                DateTime _FechaConsumo = DateTime.Now.Date;
+                int _NumeroTarjeta = (int)dt.Rows[0][0];
+
+                //if (objDAO.SqlCallLocal("SELECT Legajo FROM Consumos WHERE Turno = " + NumeroTurno + " AND Fecha = CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)) AND CONVERT(INT,Legajo) = CONVERT(INT," + dt.Rows[0][3].ToString() + ")").Rows.Count < 1)
+                string _QuerySelect = "SELECT Numero_tarjeta FROM Consumos c INNER JOIN BCPERSO1 b ON c.Numero_tarjeta = b.ZAUSW " +
+                    "AND c.Numero_tarjeta = '" + _NumeroTarjeta + "' AND c.Numero_turno = " + _NumeroTurno + " " +
+                    "AND c.Fecha_consumo = '" + _FechaConsumo + "'";
+
+                if ((objDAO.SqlCall(_QuerySelect).Rows.Count < 1))
                 {
+                    int _NumeroComida = 1;
+                    string _Dassco = "Z004";
+                    int _Numero_Pago = 0;
+                    string _Hora = DateTime.Now.ToString("HH:mm");
+                    string _Departamento = ConsumosComedor.Properties.Settings.Default.Uo;
+                    int _Automatico = 1;
+                    int _NumeroLote = 0;
+                    int _Transferida = 1;
+
                     string EsVisita = (dt.Rows[0][2].ToString().Equals("08") ? "1" : "0");
-                    objDAO.SqlExecLocal("INSERT INTO Consumos (Fecha,Hora,Tarjeta,Legajo,Nombre,CeCo,EsVisita,Turno,Local,Automatico) VALUES (CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)),CONVERT(NVARCHAR(5),GETDATE(),108),'" + dt.Rows[0][0].ToString() + "'," + _Legajo + ",'" + dt.Rows[0][4].ToString() + "','CentroCosto'," + EsVisita + "," + NumeroTurno + ",'" + ConsumosComedor.Properties.Settings.Default.Uo + "',0)");
+         
+                    string _QueryInsert = "INSERT INTO dbo.Consumos(Fecha_consumo,Numero_turno,Numero_tarjeta,Numero_comida," +
+                        "DASSCO,Numero_pago,Hora,Departamento,Automatico,Numero_Lote,Transferida) VALUES ('" + _FechaConsumo + "',"
+                        + _NumeroTurno + ",'" + _NumeroTarjeta + "'," + _NumeroComida + ",'" + _Dassco + "'," + _Numero_Pago + ",'" + _Hora + "','"
+                        + _Departamento + "'," + _Automatico + ",'" + _NumeroLote + "'," + _Transferida + ")";
+                    // objDAO.SqlExecLocal("INSERT INTO Consumos (Fecha,Hora,Tarjeta,Legajo,Nombre,CeCo,EsVisita,Turno,Local,Automatico) VALUES (CONVERT(INT,CONVERT(NVARCHAR(8),GETDATE(),112)),CONVERT(NVARCHAR(5),GETDATE(),108),'" + dt.Rows[0][0].ToString() + "'," + _Legajo + ",'" + dt.Rows[0][4].ToString() + "','CentroCosto'," + EsVisita + "," + NumeroTurno + ",'" + ConsumosComedor.Properties.Settings.Default.Uo + "',0)");
+
+                    objDAO.SqlExec(_QueryInsert);
                     CargarConsumos();
                 }
                 else

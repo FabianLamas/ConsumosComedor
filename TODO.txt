@@ -1,0 +1,6 @@
+Borrar campos inecesarios en las tablas de Comedor:
+
+Tabla Consumos: Numero_Comida ?, Numero_Pago ?, Automatico ?, Transferida ?
+
+
+Luego refactorizar codigo de la clase frmConsumos
